@@ -43,9 +43,23 @@ app.get("/api/get_questions", async (req, res) => {
     res.status(200).send(questions);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Error get you questions please try again.");
+    res.status(500).send(`Error get you questions please try again. err ${err}`);
   }
 });
+
+app.get("/api/get_all_questions", async (req, res) => {
+  try {
+    const questions = await Question.find({}).exec();
+    if (!questions) {
+      res.status(401).send("questions not found");
+    }
+    res.status(200).send(questions);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error get you questions please try again. err ${err}`);
+  }
+});
+
 
 app.post('/api/add_answer', async (req, res) => {
   try {
