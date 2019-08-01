@@ -22,8 +22,8 @@ app.post("/api/add_question", async (req, res) => {
     /*    const { email, password } = req.body;
     const user = new User({ email, password });
     await user.save();*/
-    const { email, name, question } = req.body;
-    const q = new Question({ email, name, question });
+    const { email, name, question, photo } = req.body;
+    const q = new Question({ email, name, question, photo });
     await q.save();
     res.status(200).send("You question is add");
   } catch (err) {
@@ -63,7 +63,7 @@ app.get("/api/get_all_questions", async (req, res) => {
 
 app.post('/api/add_answer', async (req, res) => {
   try {
-    const { _id, email, answer, name } = req.body;
+    const { _id, email, answer, name, photo } = req.body;
     if(!email) throw "email is empty"
     if(!_id) throw "id is empty"
     const question = await Question.findOne({ _id }).exec()
@@ -72,6 +72,7 @@ app.post('/api/add_answer', async (req, res) => {
       fromEmail: email,
       answer,
       name,
+      photo,
     })
     await question.save()
     res.status(200).send(question);
