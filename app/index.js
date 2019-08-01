@@ -97,7 +97,7 @@ app.post('/api/delete_question', async (req, res) => {
 app.post("/api/get_question", async (req, res) => {
   try {
     const { _id } = req.body;
-    if (!id) throw "_id is empty";
+    if (!_id) throw "_id is empty";
     const question = await Question.findOne({ _id }).exec();
     if (!question) {
       res.status(401).send("_id not found");
