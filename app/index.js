@@ -82,6 +82,17 @@ app.post('/api/add_answer', async (req, res) => {
   }
 })
 
+app.post('/api/delete_question', async (req, res) => {
+  try{
+    const { _id } = req.body;
+    if(!_id) throw "id is empty"
+    await Question.deleteOne({ _id }).exec()
+  } catch(err) {
+    console.log(err);
+    res.status(500).send("Error add you answer please try again.");
+  }
+}
+
 /*
 app.post("/api/authenticate", async (req, res) => {
   const { email, password } = req.body;
