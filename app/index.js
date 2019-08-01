@@ -92,7 +92,7 @@ app.post('/api/delete_question', async (req, res) => {
     console.log(err);
     res.status(500).send("Error add you answer please try again.");
   }
-}
+})
 
 /*
 app.post("/api/authenticate", async (req, res) => {
