@@ -94,37 +94,20 @@ app.post('/api/delete_question', async (req, res) => {
   }
 })
 
-/*
-app.post("/api/authenticate", async (req, res) => {
-  const { email, password } = req.body;
-  console.log(`email:${email} password:${password}`);
+app.post("/api/get_question", async (req, res) => {
   try {
-    const user = await User.findOne({ email }).exec();
-    if (!user) {
-      res.status(401).json({
-        error: "Incorrect email or password (44)",
-      });
-      return;
+    const { _id } = req.body;
+    if (!email) throw "email is empty";
+    const question = await Question.findOne({ _id }).exec();
+    if (!question) {
+      res.status(401).send("_id not found");
     }
-    const same = await user.isCorrectPassword(password);
-    if (!same) {
-      res.status(401).json({
-        error: "Incorrect email or password (56)",
-      });
-      return;
-    }
-    const payload = { email };
-    const token = jwt.sign(payload, secret, {
-      expiresIn: "1h",
-    });
-    res.status(200).send({ token });
+    res.status(200).send(question);
   } catch (err) {
     console.log(err);
-    res.status(500).json({
-      error: "Internal error please try again",
-    });
+    res.status(500).send(`Error get you questions please try again. err ${err}`);
   }
-});*/
+});
 
 const connect = async () => {
   try {
