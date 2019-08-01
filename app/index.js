@@ -87,6 +87,7 @@ app.post('/api/delete_question', async (req, res) => {
     const { _id } = req.body;
     if(!_id) throw "id is empty"
     await Question.deleteOne({ _id }).exec()
+    res.status(200).send("OK");
   } catch(err) {
     console.log(err);
     res.status(500).send("Error add you answer please try again.");
