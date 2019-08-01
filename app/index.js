@@ -32,7 +32,7 @@ app.post("/api/add_question", async (req, res) => {
   }
 });
 
-app.get("/api/get_questions", async (req, res) => {
+app.post("/api/get_questions", async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) throw "email is empty";
